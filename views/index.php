@@ -15,40 +15,13 @@
 
 <body>
     <!-- CONTENEDOR -->
-    <div class="container-fluid row p-3">
+    <div class="w-100">
 
-        <!-- CARGAR DATOS -->
-        <form method="POST" class="col-4">
-            <h3 class="text-center p-3">Agregar Datos</h3>
-
-            <!-- AGREGA A LA BASE DE DATOS -->
-            <?php
-            include '../controllers/create.php';
-            ?>
-
-            <!-- FROMULARIO -->
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Nombre</label>
-                <input type="text" class="form-control" name="nombre" id="" autocomplete="off">
-            </div>
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Apellido</label>
-                <input type="text" class="form-control" name="apellido" id="" autocomplete="off">
-            </div>
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Edad</label>
-                <input type="number" class="form-control" name="edad" id="" autocomplete="off">
-            </div>
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Correo</label>
-                <input type="email" class="form-control" name="correo" id="" autocomplete="off">
-            </div>
-            <button type="submit" name="agregar" class="btn btn-primary"><i class="bi bi-plus-circle"> Agregar</i></button>
-        </form>
-
-        <!-- MOSTRAR DATOS -->
-        <div class="col-8">
+            <!-- MOSTRAR DATOS -->
             <h3 class="text-center p-3">Datos Cargados</h3>
+            <div class="ms-2">
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal"><i class="bi bi-plus-circle"> Cargar Datos</i></button>
+            </div>
 
             <!-- BORRA DATOS -->
             <?php
@@ -57,7 +30,7 @@
             ?>
 
             <!-- TABLA CON LOS DATOS -->
-            <table class="table">
+            <table class="table me-3">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -89,8 +62,8 @@
                             <td><?= $datos->apellido ?></td>
                             <td><?= $datos->edad ?></td>
                             <td><?= $datos->correo ?></td>
-                            <td>
-                                <a class="btn btn-warning" href="" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="modificar('<?= $arreglo ?>')"><i class="bi bi-pencil-fill"></i></a>
+                            <td style="min-width: 105px !important; max-width: 105px !important;">
+                                <a class="btn btn-warning" href="" data-bs-toggle="modal" data-bs-target="#updateModal" onclick="modificar('<?= $arreglo ?>')"><i class="bi bi-pencil-fill"></i></a>
                                 <a class="btn btn-danger" href="index.php?id=<?= $datos->id ?>"><i class="bi bi-trash3-fill"></i></a>
                             </td>
                         </tr>
@@ -99,15 +72,55 @@
                     <?php } ?>
                 </tbody>
             </table>
-        </div>
     </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- Modal Create -->
+    <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Editar Datos</h5>
+                    <h5 class="modal-title" id="createModal">Agregar tus Datos</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- CARGAR DATOS -->
+                    <form method="POST">
+
+                        <!-- AGREGA A LA BASE DE DATOS -->
+                        <?php
+                        include '../controllers/create.php';
+                        ?>
+
+                        <!-- FROMULARIO -->
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" name="nombre" id="" autocomplete="off">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Apellido</label>
+                            <input type="text" class="form-control" name="apellido" id="" autocomplete="off">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Edad</label>
+                            <input type="number" class="form-control" name="edad" id="" autocomplete="off">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Correo</label>
+                            <input type="email" class="form-control" name="correo" id="" autocomplete="off">
+                        </div>
+                        <button type="submit" name="agregar" class="btn btn-primary"><i class="bi bi-plus-circle"> Agregar</i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Update-->
+    <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateModal">Editar Datos</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
